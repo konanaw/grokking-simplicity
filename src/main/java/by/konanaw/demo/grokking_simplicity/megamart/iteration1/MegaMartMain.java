@@ -12,6 +12,10 @@ public class MegaMartMain {
             new Product("shoes", 6.3d),
             new Product("t-shirt", 2.1d)
     );
+    private static List<Button> buttons = Arrays.asList(
+            new Button(1, new Product("ball", 10d)),
+            new Button(2, new Product("hat", 15.3d))
+    );
 
     public static void main(String[] args) {
         for (Product product : products) {
@@ -27,11 +31,11 @@ public class MegaMartMain {
 
     private static void calcCartTotal() {
         shoppingCartTotal = 0d;
-        for (var i = 0; i < shoppingCart.size(); i++) {
-            var item = shoppingCart.get(i);
+        for (ShoppingCart item: shoppingCart) {
             shoppingCartTotal += item.getPrice();
         }
         setCartTotalDom();
+        updateShippingIcons();
         updateTaxDom();
     }
 
@@ -43,8 +47,23 @@ public class MegaMartMain {
         System.out.println("setTaxDom: " + v);
     }
 
+    private static void updateShippingIcons() {
+        List<Button> buttons = getBuyButtonsDom();
+        for (Button button : buttons) {
+            var item = button.getItem();
+            if (item.getPrice() + shoppingCartTotal >= 20)
+                button.show_free_shipping_icon();
+            else
+                button.hide_free_shipping_icon();
+        }
+    }
+
+    private static List<Button> getBuyButtonsDom() {
+        return buttons;
+    }
+
     private static void setCartTotalDom() {
-        System.out.println("setCartTotalDom");
+        System.out.println("setCartTotalDom: " + shoppingCartTotal);
     }
 
 }
