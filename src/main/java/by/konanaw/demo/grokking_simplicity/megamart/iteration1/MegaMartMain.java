@@ -32,6 +32,15 @@ public class MegaMartMain {
             shoppingCartTotal += item.getPrice();
         }
         setCartTotalDom();
+        updateTaxDom();
+    }
+
+    private static void updateTaxDom() {
+        setTtaxDom(shoppingCartTotal * 0.10);
+    }
+
+    private static void setTtaxDom(double v) {
+        System.out.println(v);
     }
 
     private static void setCartTotalDom() {
