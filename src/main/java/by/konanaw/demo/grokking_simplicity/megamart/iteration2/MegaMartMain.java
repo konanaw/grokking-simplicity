@@ -51,7 +51,11 @@ public class MegaMartMain {
     }
 
     private static void updateTaxDom() {
-        setTaxDom(shoppingCartTotal * 0.10);
+        setTaxDom(calcTax(shoppingCartTotal));
+    }
+
+    private static double calcTax(Double amount) {
+        return amount * 0.10;
     }
 
     private static void setTaxDom(double v) {
@@ -62,11 +66,15 @@ public class MegaMartMain {
         List<Button> buttons = getBuyButtonsDom();
         for (Button button : buttons) {
             var item = button.getItem();
-            if (item.getPrice() + shoppingCartTotal >= 20)
+            if (getsFreeShipping(shoppingCartTotal, item.getPrice()))
                 button.show_free_shipping_icon();
             else
                 button.hide_free_shipping_icon();
         }
+    }
+
+    private static boolean getsFreeShipping(Double total, Double itemPrice) {
+        return itemPrice + total >= 20;
     }
 
     private static List<Button> getBuyButtonsDom() {
