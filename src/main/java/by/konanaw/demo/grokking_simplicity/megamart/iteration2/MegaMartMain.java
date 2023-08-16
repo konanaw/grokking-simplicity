@@ -30,15 +30,15 @@ public class MegaMartMain {
     }
 
     private static void calcCartTotal() {
-        shoppingCartTotal = calcTotal();
+        shoppingCartTotal = calcTotal(shoppingCart);
         setCartTotalDom();
         updateShippingIcons();
         updateTaxDom();
     }
 
-    private static Double calcTotal() {
+    private static Double calcTotal(List<ShoppingCart> cart) {
         Double total = 0d;
-        for (ShoppingCart item: shoppingCart) {
+        for (ShoppingCart item: cart) {
             total += item.getPrice();
         }
         return total;
