@@ -25,12 +25,14 @@ public class MegaMartMain {
     }
 
     private static void addItemToCart(String name, Double price) {
-        addItem(name, price);
+        shoppingCart = addItem(shoppingCart, name, price);
         calcCartTotal();
     }
 
-    private static void addItem(String name, Double price) {
-        shoppingCart.add(new ShoppingCart(name, price));
+    private static List<ShoppingCart> addItem(List<ShoppingCart> cart, String name, Double price) {
+        List<ShoppingCart> newCart = new ArrayList<>(cart); // clone, newCart - local variable
+        newCart.add(new ShoppingCart(name, price));
+        return newCart;
     }
 
     private static void calcCartTotal() {
