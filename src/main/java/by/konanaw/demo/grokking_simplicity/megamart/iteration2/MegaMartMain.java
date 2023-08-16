@@ -25,8 +25,12 @@ public class MegaMartMain {
     }
 
     private static void addItemToCart(String name, Double price) {
-        shoppingCart.add(new ShoppingCart(name, price));
+        addItem(name, price);
         calcCartTotal();
+    }
+
+    private static void addItem(String name, Double price) {
+        shoppingCart.add(new ShoppingCart(name, price));
     }
 
     private static void calcCartTotal() {
