@@ -19,19 +19,19 @@ public class MegaMartMain {
 
     public static void main(String[] args) {
         for (Product product : products) {
-            addItemToCart(product.getName(), product.getPrice());
+            addItemToCart(new ShoppingCartItem(product.getName(), product.getPrice()));
         }
         System.out.println(shoppingCartTotal);
     }
 
-    private static void addItemToCart(String name, Double price) {
-        shoppingCart = addItem(shoppingCart, name, price);
+    private static void addItemToCart(ShoppingCartItem cartItem) {
+        shoppingCart = addItem(shoppingCart, cartItem);
         calcCartTotal(shoppingCart);
     }
 
-    private static List<ShoppingCartItem> addItem(List<ShoppingCartItem> cart, String name, Double price) {
+    private static List<ShoppingCartItem> addItem(List<ShoppingCartItem> cart, ShoppingCartItem cartItem) {
         List<ShoppingCartItem> newCart = new ArrayList<>(cart); // clone, newCart - local variable
-        newCart.add(new ShoppingCartItem(name, price));
+        newCart.add(cartItem);
         return newCart;
     }
 
@@ -67,7 +67,7 @@ public class MegaMartMain {
         List<Button> buttons = getBuyButtonsDom();
         for (Button button : buttons) {
             var item = button.getItem();
-            var expectedCart = addItem(cart, item.getName(), item.getPrice());
+            var expectedCart = addItem(cart, new ShoppingCartItem(item.getName(), item.getPrice()));
             if (getsFreeShipping(expectedCart))
                 button.show_free_shipping_icon();
             else
