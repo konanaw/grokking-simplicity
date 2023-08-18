@@ -33,10 +33,20 @@ public class MegaMartMain {
         shoppingCartTotal = total;
     }
 
+//    private static List<ShoppingCartItem> addItem(List<ShoppingCartItem> cart, ShoppingCartItem cartItem) {
+//        List<ShoppingCartItem> newCart = new ArrayList<>(cart); // clone, newCart - local variable
+//        newCart.add(cartItem);
+//        return newCart;
+//    }
+
     private static List<ShoppingCartItem> addItem(List<ShoppingCartItem> cart, ShoppingCartItem cartItem) {
-        List<ShoppingCartItem> newCart = new ArrayList<>(cart); // clone, newCart - local variable
-        newCart.add(cartItem);
-        return newCart;
+        return addElement(cart, cartItem);
+    }
+
+    private static <T> List<T> addElement(List<T> list, T elem) {
+        List<T> copy = new ArrayList<>(list); // clone, copy - local variable
+        copy.add(elem);
+        return copy;
     }
 
     private static Double calcTotal(List<ShoppingCartItem> cart) {
