@@ -26,21 +26,17 @@ public class MegaMartMain {
 
     private static void addItemToCart(ShoppingCartItem cartItem) {
         shoppingCart = addItem(shoppingCart, cartItem);
-        calcCartTotal(shoppingCart);
+        var total = calcTotal(shoppingCart);
+        setCartTotalDom(total);
+        updateShippingIcons(shoppingCart);
+        updateTaxDom(total);
+        shoppingCartTotal = total;
     }
 
     private static List<ShoppingCartItem> addItem(List<ShoppingCartItem> cart, ShoppingCartItem cartItem) {
         List<ShoppingCartItem> newCart = new ArrayList<>(cart); // clone, newCart - local variable
         newCart.add(cartItem);
         return newCart;
-    }
-
-    private static void calcCartTotal(List<ShoppingCartItem> cart) {
-        var total = calcTotal(cart);
-        setCartTotalDom(total);
-        updateShippingIcons(cart);
-        updateTaxDom(total);
-        shoppingCartTotal = total;
     }
 
     private static Double calcTotal(List<ShoppingCartItem> cart) {
