@@ -26,7 +26,7 @@ public class MegaMartMain {
 
     private static void addItemToCart(String name, Double price) {
         shoppingCart = addItem(shoppingCart, name, price);
-        calcCartTotal();
+        calcCartTotal(shoppingCart);
     }
 
     private static List<ShoppingCart> addItem(List<ShoppingCart> cart, String name, Double price) {
@@ -35,10 +35,10 @@ public class MegaMartMain {
         return newCart;
     }
 
-    private static void calcCartTotal() {
-        shoppingCartTotal = calcTotal(shoppingCart);
+    private static void calcCartTotal(List<ShoppingCart> cart) {
+        shoppingCartTotal = calcTotal(cart);
         setCartTotalDom();
-        updateShippingIcons();
+        updateShippingIcons(cart);
         updateTaxDom();
     }
 
@@ -62,11 +62,11 @@ public class MegaMartMain {
         System.out.println("setTaxDom: " + v);
     }
 
-    private static void updateShippingIcons() {
+    private static void updateShippingIcons(List<ShoppingCart> cart) {
         List<Button> buttons = getBuyButtonsDom();
         for (Button button : buttons) {
             var item = button.getItem();
-            var expectedCart = addItem(shoppingCart, item.getName(), item.getPrice());
+            var expectedCart = addItem(cart, item.getName(), item.getPrice());
             if (getsFreeShipping(expectedCart))
                 button.show_free_shipping_icon();
             else
