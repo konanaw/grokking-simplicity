@@ -36,10 +36,11 @@ public class MegaMartMain {
     }
 
     private static void calcCartTotal(List<ShoppingCart> cart) {
-        shoppingCartTotal = calcTotal(cart);
-        setCartTotalDom();
+        var total = calcTotal(cart);
+        setCartTotalDom(total);
         updateShippingIcons(cart);
-        updateTaxDom();
+        updateTaxDom(total);
+        shoppingCartTotal = total;
     }
 
     private static Double calcTotal(List<ShoppingCart> cart) {
@@ -50,8 +51,8 @@ public class MegaMartMain {
         return total;
     }
 
-    private static void updateTaxDom() {
-        setTaxDom(calcTax(shoppingCartTotal));
+    private static void updateTaxDom(Double total) {
+        setTaxDom(calcTax(total));
     }
 
     private static double calcTax(Double amount) {
@@ -82,8 +83,8 @@ public class MegaMartMain {
         return buttons;
     }
 
-    private static void setCartTotalDom() {
-        System.out.println("setCartTotalDom: " + shoppingCartTotal);
+    private static void setCartTotalDom(Double total) {
+        System.out.println("setCartTotalDom: " + total);
     }
 
 }
