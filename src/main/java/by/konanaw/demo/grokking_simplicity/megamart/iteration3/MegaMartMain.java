@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MegaMartMain {
 
-    private static List<ShoppingCart> shoppingCart = new ArrayList<>();
+    private static List<ShoppingCartItem> shoppingCart = new ArrayList<>();
     private static Double shoppingCartTotal = 0d;
     private static List<Product> products = Arrays.asList(
             new Product("shoes", 6.3d),
@@ -29,13 +29,13 @@ public class MegaMartMain {
         calcCartTotal(shoppingCart);
     }
 
-    private static List<ShoppingCart> addItem(List<ShoppingCart> cart, String name, Double price) {
-        List<ShoppingCart> newCart = new ArrayList<>(cart); // clone, newCart - local variable
-        newCart.add(new ShoppingCart(name, price));
+    private static List<ShoppingCartItem> addItem(List<ShoppingCartItem> cart, String name, Double price) {
+        List<ShoppingCartItem> newCart = new ArrayList<>(cart); // clone, newCart - local variable
+        newCart.add(new ShoppingCartItem(name, price));
         return newCart;
     }
 
-    private static void calcCartTotal(List<ShoppingCart> cart) {
+    private static void calcCartTotal(List<ShoppingCartItem> cart) {
         var total = calcTotal(cart);
         setCartTotalDom(total);
         updateShippingIcons(cart);
@@ -43,9 +43,9 @@ public class MegaMartMain {
         shoppingCartTotal = total;
     }
 
-    private static Double calcTotal(List<ShoppingCart> cart) {
+    private static Double calcTotal(List<ShoppingCartItem> cart) {
         Double total = 0d;
-        for (ShoppingCart item: cart) {
+        for (ShoppingCartItem item: cart) {
             total += item.getPrice();
         }
         return total;
@@ -63,7 +63,7 @@ public class MegaMartMain {
         System.out.println("setTaxDom: " + v);
     }
 
-    private static void updateShippingIcons(List<ShoppingCart> cart) {
+    private static void updateShippingIcons(List<ShoppingCartItem> cart) {
         List<Button> buttons = getBuyButtonsDom();
         for (Button button : buttons) {
             var item = button.getItem();
@@ -75,7 +75,7 @@ public class MegaMartMain {
         }
     }
 
-    private static boolean getsFreeShipping(List<ShoppingCart> cart) {
+    private static boolean getsFreeShipping(List<ShoppingCartItem> cart) {
         return calcTotal(cart) >= 20;
     }
 
