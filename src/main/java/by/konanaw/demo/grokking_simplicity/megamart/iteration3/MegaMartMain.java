@@ -66,15 +66,16 @@ public class MegaMartMain {
         List<Button> buttons = getBuyButtonsDom();
         for (Button button : buttons) {
             var item = button.getItem();
-            if (getsFreeShipping(shoppingCartTotal, item.getPrice()))
+            var expectedCart = addItem(shoppingCart, item.getName(), item.getPrice());
+            if (getsFreeShipping(expectedCart))
                 button.show_free_shipping_icon();
             else
                 button.hide_free_shipping_icon();
         }
     }
 
-    private static boolean getsFreeShipping(Double total, Double itemPrice) {
-        return itemPrice + total >= 20;
+    private static boolean getsFreeShipping(List<ShoppingCart> cart) {
+        return calcTotal(cart) >= 20;
     }
 
     private static List<Button> getBuyButtonsDom() {
