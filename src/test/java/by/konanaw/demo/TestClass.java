@@ -12,4 +12,12 @@ public class TestClass {
         assertTrue(true);
     }
 
+    @Test
+    public void calculateHashMapBucketCount() {
+        String key = "abcdef";
+        int n = 16;
+        int index = key.hashCode() & (n-1);
+        System.out.println(index);
+    }
+
 }
